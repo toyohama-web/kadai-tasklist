@@ -10,6 +10,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <!-- render に_flash_tasks.html.erbの記述内容を埋め込む -->
+      <%= render "layouts/flash_tasks" %>
+      
+      <%= yield %>
+    </div>
   </body>
 </html>
