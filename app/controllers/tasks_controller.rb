@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+  # before_action, 共通化
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  
   # 一覧
   def index
     @tasks = Task.all
@@ -6,7 +9,6 @@ class TasksController < ApplicationController
   
   # 詳細
   def show
-    @task = Task.find(params[:id])
   end
   
   # 作成ページ
@@ -29,7 +31,6 @@ class TasksController < ApplicationController
   
   # 編集
   def edit
-    @task = Task.find(params[:id])
   end
   
   def update
@@ -46,7 +47,6 @@ class TasksController < ApplicationController
   
   # 削除
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
     
     flash[:success] = "タスクは削除されました。"
@@ -54,9 +54,13 @@ class TasksController < ApplicationController
   end
   
   private
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
   
   # Strong Parameter
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content, :status)
   end
 end
