@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   
   # 一覧
   def index
-    @tasks = Task.all
+    @tasks = Task.all.page(params[:page]).per(15)
   end
   
   # 詳細
